@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoVerse - A Real-Time 3D World Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar-left">
+            <div class="logo-section">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <polygon points="50,10 90,35 70,85 30,85 10,35" fill="url(#logoGrad)"/>
+                        <circle cx="50" cy="50" r="25" fill="none" stroke="#0ea5e9" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h1>EchoVerse</h1>
+                <p>A Real-Time 3D World Platform</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-text">
+                        <h3>Live Multiplayer</h3>
+                        <p>Explore, play, and connect in real-time.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-text">
+                        <h3>AI Powered NPCs</h3>
+                        <p>Talk with intelligent AI characters.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">▶️</div>
+                    <div class="feature-text">
+                        <h3>Watch Together</h3>
+                        <p>Stream video and watch in sync with friends.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-text">
+                        <h3>Play & Earn</h3>
+                        <p>Play mini-games and earn crypto.</p>
+                    </div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-text">
+                        <h3>Built for the Web</h3>
+                        <p>No downloads. Just open and play.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP NAV -->
+            <nav class="top-nav">
+                <div class="online-status">
+                    <span class="dot"></span>
+                    <span id="playerCount">42 Online</span>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn active">🎮</button>
+                    <button class="nav-btn">📦</button>
+                    <button class="nav-btn">🔍</button>
+                    <button class="nav-btn">👥</button>
+                    <button class="nav-btn">⚙️</button>
+                </div>
+            </nav>
+
+            <!-- 3D WORLD VIEW -->
+            <div class="world-view-container">
+                <div id="world-canvas" class="world-view">
+                    <div class="world-placeholder">
+                        <div class="loading-text">
+                            <h2>🌍 EchoVerse World Loading...</h2>
+                            <p>Connecting to multiplayer realm</p>
+                            <div class="loading-bar">
+                                <div class="loading-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPASS -->
+                <div class="compass">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.5"/>
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="#00ffff" stroke-width="0.5" opacity="0.3"/>
+                        <line x1="50" y1="10" x2="50" y2="30" stroke="#ff0080" stroke-width="2"/>
+                        <text x="50" y="20" text-anchor="middle" fill="#00ffff" font-size="8">N</text>
+                        <circle cx="50" cy="50" r="5" fill="#00ffff"/>
+                    </svg>
+                </div>
+
+                <!-- BOTTOM HOTBAR -->
+                <div class="hotbar">
+                    <div class="hotbar-item" data-slot="1">
+                        <div class="item-icon">👋</div>
+                        <span>1</span>
+                    </div>
+                    <div class="hotbar-item" data-slot="2">
+                        <div class="item-icon">📱</div>
+                        <span>2</span>
+                    </div>
+                    <div class="hotbar-item" data-slot="3">
+                        <div class="item-icon">🎮</div>
+                        <span>3</span>
+                    </div>
+                    <div class="hotbar-item" data-slot="4">
+                        <div class="item-icon">🏠</div>
+                        <span>4</span>
+                    </div>
+                    <div class="hotbar-item" data-slot="5">
+                        <div class="item-icon">💎</div>
+                        <span>5</span>
+                    </div>
+                    <div class="hotbar-item" data-slot="6">
+                        <div class="item-icon">🔮</div>
+                        <span>6</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAT BOX -->
+            <div class="chat-box">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-message npc">
+                        <strong>LunaX:</strong> Hey everyone! 👋
+                    </div>
+                    <div class="chat-message npc">
+                        <strong>CyberNova:</strong> What's up?
+                    </div>
+                    <div class="chat-message player">
+                        <strong>You:</strong> Exploring the new plaza!
+                    </div>
+                    <div class="chat-message npc">
+                        <strong>GhostWalker:</strong> Let's play a game later.
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Type a message...">
+                    <button id="sendBtn">➤</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar-right">
+            <!-- AI NPC PANEL -->
+            <div class="npc-panel">
+                <div class="npc-header">
+                    <div class="npc-avatar">
+                        <div class="avatar-glow"></div>
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="35" r="15" fill="#00ff00" opacity="0.8"/>
+                            <ellipse cx="40" cy="30" rx="3" ry="5" fill="#000"/>
+                            <ellipse cx="60" cy="30" rx="3" ry="5" fill="#000"/>
+                            <path d="M 40 50 Q 50 60 60 50" stroke="#00ff00" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="npc-info">
+                        <h3>AI NPC</h3>
+                        <p class="status online">● Online</p>
+                    </div>
+                </div>
+
+                <div class="npc-name">AURORA</div>
+                <div class="npc-greeting">Hello! I'm Aurora. How can I help you today?</div>
+
+                <div class="npc-questions">
+                    <button class="question-btn">What's your favorite place here?</button>
+                    <button class="question-btn">Tell me something interesting.</button>
+                    <button class="question-btn">Can you help me with a quest?</button>
+                    <button class="question-btn">Goodbye!</button>
+                </div>
+            </div>
+
+            <!-- STATS PANEL -->
+            <div class="stats-panel">
+                <h3>WORLD STATS</h3>
+                <div class="stat-item">
+                    <span>Players Online</span>
+                    <span class="stat-value" id="statOnline">42</span>
+                </div>
+                <div class="stat-item">
+                    <span>Active Locations</span>
+                    <span class="stat-value">8</span>
+                </div>
+                <div class="stat-item">
+                    <span>Total Visits</span>
+                    <span class="stat-value">12.4K</span>
+                </div>
+            </div>
+
+            <!-- MINI GAMES -->
+            <div class="mini-games-panel">
+                <h3>MINI GAMES</h3>
+                <div class="game-card">
+                    <div class="game-title">COIN RUSH</div>
+                    <div class="game-preview">🪙⚡</div>
+                    <button class="play-btn">PLAY</button>
+                </div>
+            </div>
+
+            <!-- WALLET PANEL -->
+            <div class="wallet-panel">
+                <h3>CRYPTO WALLET</h3>
+                <div class="balance">
+                    <span class="balance-amount">2.458 ECHO</span>
+                    <span class="balance-usd">$245.80 USD</span>
+                </div>
+                <div class="wallet-actions">
+                    <button class="wallet-btn">Send</button>
+                    <button class="wallet-btn">Receive</button>
+                    <button class="wallet-btn">History</button>
+                </div>
+                <div class="transactions">
+                    <div class="transaction">
+                        <span>+ 0.50 ECHO</span>
+                        <span class="trans-time">5m ago</span>
+                    </div>
+                    <div class="transaction">
+                        <span>- 0.25 ECHO</span>
+                        <span class="trans-time">1h ago</span>
+                    </div>
+                    <div class="transaction">
+                        <span>+ 1.20 ECHO</span>
+                        <span class="trans-time">3h ago</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- BOTTOM PANELS -->
+    <div class="bottom-panels">
+        <!-- CHAT & SOCIAL -->
+        <div class="bottom-panel chat-social">
+            <div class="panel-header">
+                <h3>CHAT & SOCIAL</h3>
+                <div class="panel-tabs">
+                    <button class="tab active">Lobby</button>
+                    <button class="tab">Gaming</button>
+                    <button class="tab">Watch Party</button>
+                </div>
+            </div>
+            <div class="social-content">
+                <div class="lobby-chat">
+                    <div class="chat-msg"><strong style="color: #2fe3ff">Zenith</strong>: Just joined the world</div>
+                    <div class="chat-msg"><strong style="color: #ff00ff">Astra</strong>: So good!</div>
+                </div>
+                <div class="voice-channels">
+                    <div class="channel">🔊 Lounge</div>
+                    <div class="channel">🎮 Gaming</div>
+                    <div class="channel">🎬 Watch Party</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WATCH TOGETHER -->
+        <div class="bottom-panel watch-together">
+            <div class="panel-header">
+                <h3>WATCH TOGETHER</h3>
+            </div>
+            <div class="video-player">
+                <div class="video-placeholder">🎬</div>
+                <div class="video-controls">
+                    <button>▶️</button>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <span>43:27 / 158:42</span>
+                </div>
+                <p>Watching: House of the Dragon S2E4</p>
+            </div>
+            <div class="watch-users">
+                <div class="watch-avatar"></div>
+                <div class="watch-avatar"></div>
+                <div class="watch-avatar"></div>
+            </div>
+        </div>
+
+        <!-- MINI GAMES -->
+        <div class="bottom-panel mini-games">
+            <div class="panel-header">
+                <h3>MINI GAMES</h3>
+            </div>
+            <div class="game-board">
+                <div class="game-card-compact">
+                    <h4>COIN RUSH</h4>
+                    <p>Score: 1240</p>
+                    <button>PLAY</button>
+                </div>
+                <div class="leaderboard-compact">
+                    <h4>LEADERBOARD</h4>
+                    <ol>
+                        <li>CyberNova - 9,210</li>
+                        <li>LunaX - 7,540</li>
+                        <li>You - 6,230</li>
+                        <li>GhostWalker - 5,310</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER INFO -->
+    <div class="footer-info">
+        <div class="footer-feature">
+            <span class="icon">⚡</span>
+            <span>REAL-TIME</span>
+            <span class="text">Built with WebSockets for instant updates.</span>
+        </div>
+        <div class="footer-feature">
+            <span class="icon">🤖</span>
+            <span>AI POWERED</span>
+            <span class="text">Integrated with OpenAI for smart conversations.</span>
+        </div>
+        <div class="footer-feature">
+            <span class="icon">🌐</span>
+            <span>CROSS PLATFORM</span>
+            <span class="text">Works on desktop, mobile, and VR.</span>
+        </div>
+        <div class="footer-feature">
+            <span class="icon">🔒</span>
+            <span class="text">SECURE & DECENTRALIZED</span>
+            <span class="text">Crypto payments and blockchain.</span>
+        </div>
+        <div class="footer-feature">
+            <span class="icon">🎨</span>
+            <span>BUILT FOR CREATORS</span>
+            <span class="text">Easy to extend, customize, and deploy.</span>
+        </div>
+    </div>
+
+    <script src="socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
